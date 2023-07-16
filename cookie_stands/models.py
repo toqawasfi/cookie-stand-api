@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 
 
 class CookieStand(models.Model):
@@ -12,6 +13,9 @@ class CookieStand(models.Model):
     minimum_customers_per_hour = models.IntegerField(default=0)
     maximum_customers_per_hour = models.IntegerField(default=0)
     average_cookies_per_sale = models.FloatField(default=0)
+
+    def get_absolute_url(self):
+        return reverse('cookie_stand_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.location
